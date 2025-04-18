@@ -16,6 +16,8 @@ precision mediump float;
  uniform vec2 u_mouse;
  uniform float u_time;
 
+ const int NUM_CIRCLES = 20;
+
 // Convert pixel coords to normalized coords
  vec2 to_coord(vec2 pixel_point)
  {
@@ -53,6 +55,7 @@ precision mediump float;
     return 1. - smoothstep(-E, E, sd);
  }
 
+/*
  float flipping_circle(vec2 point, vec2 center, float radius)
  {
     float sd = sCircle(point, center, radius);
@@ -64,19 +67,32 @@ precision mediump float;
 
     return circle_alpha * flip;
  }
-
+*/
 
  void main(void)
  {
-    vec2 position = to_coord(gl_FragCoord.xy);
-    vec3 color = vec3(0.2353, 0.8235, 0.8667);
-  
-    vec2 p = vec2(cos(u_time), sin(u_time))*0.25+vec2(0.5);
-    float t = flipping_circle(position, p  ,0.125);
-    float a = flipping_circle(position, p  ,0.1234525);
+   vec2 position = to_coord(gl_FragCoord.xy);
+   vec3 color = vec3(0.1686, 0.1647, 0.2235);
 
-    color = mix(color, vec3(1), t);
-    color = mix(color, vec3(1.0, 0.9412, 0.1255), t);
+   vec2 p = vec2(cos(u_time), sin(u_time)) * 0.25 + vec2(0.5);
 
-    FragColor = vec4(color, 1.0);
+   vec2 first = vec2(
+      0.6 * sin(u_time * 0.7),
+      0.4 * cos(u_time * 0.5)
+   );
+
+   for (int i = 0; i < NUM_CIRCLES; ++i) {
+
+      float t = float(i) * 0.2;
+
+      float x = first.x + 0.01 * float(i) * sin(u_time * 2.0 - t * 2.0);
+      float y = first.y + 0.01 * float(i) * cos(u_time * 2.5 - t * 2.0);
+
+      vec2 segment_pos = vec2(x, y);
+      float seg = circle(position, segment_pos, 0.03);
+
+      vec3 seg_color = mix(vec3(0.8784, 0.9176, 0.1373), vec3(0.1686, 0.4118, 0.8), float(i) / float(NUM_CIRCLES));
+      color = mix(color, seg_color, seg);
+   }
+   FragColor = vec4(color, 1.0);
  }
