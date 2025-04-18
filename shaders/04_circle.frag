@@ -73,8 +73,10 @@ precision mediump float;
   
     vec2 p = vec2(cos(u_time), sin(u_time))*0.25+vec2(0.5);
     float t = flipping_circle(position, p  ,0.125);
-    float t = circle(position, p  ,0.125);
+    float a = flipping_circle(position, p  ,0.1234525);
+
     color = mix(color, vec3(1), t);
-    
+    color = mix(color, vec3(1.0, 0.9412, 0.1255), t);
+
     FragColor = vec4(color, 1.0);
  }
