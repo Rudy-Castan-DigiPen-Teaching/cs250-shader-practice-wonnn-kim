@@ -16,7 +16,7 @@ precision mediump float;
  uniform vec2 u_mouse;
  uniform float u_time;
 
- const int NUM_CIRCLES = 20;
+ const int NUM_CIRCLES = 30;
 
 // Convert pixel coords to normalized coords
  vec2 to_coord(vec2 pixel_point)
@@ -80,11 +80,10 @@ precision mediump float;
 
    for (int i = 0; i < NUM_CIRCLES; ++i) 
    {
-
       float t = float(i) * 0.2;
 
-      float x = first.x + 0.01 * float(i) * sin(u_time * 2.0 - t * 2.0);
-      float y = first.y + 0.01 * float(i) * cos(u_time * 2.5 - t * 2.0);
+      float x = first.x + (0.01 * float(i)) * sin(u_time * 2.5 - t * 2.0);
+      float y = first.y + (0.01 * float(i)) * cos(u_time * 2.5 - t * 2.0);
 
       vec2 segment_pos = vec2(x, y);
       float seg = circle(position, segment_pos, 0.03);
