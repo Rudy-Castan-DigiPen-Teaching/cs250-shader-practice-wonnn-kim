@@ -59,7 +59,6 @@ precision mediump float;
     // return 1.0 - step(0., sd);
     float E = fwidth(sd);
     float circle_alpha = 1. - smoothstep(-E, E, sd);
-    //return 1. - smoothstep(-E, E, sd);
 
     float flip = sin(u_time * 2.0) * 0.5 + 0.5;
 
@@ -73,7 +72,7 @@ precision mediump float;
     vec3 color = vec3(0.2353, 0.8235, 0.8667);
   
     vec2 p = vec2(cos(u_time), sin(u_time))*0.25+vec2(0.5);
-    float t = circle(position, p  ,0.125);
+    float t = flipping_circle(position, p  ,0.125);
     color = mix(color, vec3(1), t);
     
     FragColor = vec4(color, 1.0);
