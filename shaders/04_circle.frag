@@ -74,12 +74,12 @@ precision mediump float;
    vec2 position = to_coord(gl_FragCoord.xy);
    vec3 color = vec3(0.1686, 0.1647, 0.2235);
 
-   vec2 p = vec2(cos(u_time), sin(u_time)) * 0.25 + vec2(0.5);
+   //vec2 p = vec2(cos(u_time), sin(u_time)) * 0.5 + vec2(0.5);
 
    vec2 first = vec2(
       0.6 * sin(u_time * 0.7),
       0.4 * cos(u_time * 0.5)
-   );
+   ) + vec2(0.5);
 
    for (int i = 0; i < NUM_CIRCLES; ++i) {
 
