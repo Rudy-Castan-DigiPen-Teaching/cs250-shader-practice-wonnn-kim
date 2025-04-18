@@ -76,12 +76,10 @@ precision mediump float;
 
    //vec2 p = vec2(cos(u_time), sin(u_time)) * 0.5 + vec2(0.5);
 
-   vec2 first = vec2(
-      0.6 * sin(u_time * 0.7),
-      0.4 * cos(u_time * 0.5)
-   ) + vec2(0.5);
+   vec2 first = vec2( 0.3 * sin(u_time * 0.5), 0.1 * cos(u_time * 0.5)) + vec2(0.5);
 
-   for (int i = 0; i < NUM_CIRCLES; ++i) {
+   for (int i = 0; i < NUM_CIRCLES; ++i) 
+   {
 
       float t = float(i) * 0.2;
 
@@ -91,7 +89,7 @@ precision mediump float;
       vec2 segment_pos = vec2(x, y);
       float seg = circle(position, segment_pos, 0.03);
 
-      vec3 seg_color = mix(vec3(0.8784, 0.9176, 0.1373), vec3(0.1686, 0.4118, 0.8), float(i) / float(NUM_CIRCLES));
+      vec3 seg_color = mix(vec3(0.9608, 1.0, 0.2196), vec3(0.0784, 0.2157, 0.4431), float(i) / float(NUM_CIRCLES));
       color = mix(color, seg_color, seg);
    }
    FragColor = vec4(color, 1.0);
